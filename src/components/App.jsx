@@ -9,6 +9,9 @@ class App extends Component {
 
   getRequestSearch = data => {
     console.log(data);
+    this.setState({
+      search: data.search,
+    });
   };
   togleShowModal = () => {
     this.setState({ showModal: !this.state.showModal });
@@ -26,7 +29,9 @@ class App extends Component {
         }}
       >
         <Searchbar getSearch={this.getRequestSearch} />
-        {this.state.showModal && <ModalWindow></ModalWindow>}
+        {this.state.showModal && (
+          <ModalWindow onClose={this.togleShowModal}></ModalWindow>
+        )}
       </div>
     );
   }
