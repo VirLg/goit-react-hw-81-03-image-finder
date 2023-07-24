@@ -1,8 +1,11 @@
-const ImageItemGallery = ({ handleItemClick }) => {
-  return (
-    <li onClick={() => handleItemClick()}>
-      <img src="" alt="" />
-    </li>
-  );
+const ImageItemGallery = ({ value }) => {
+  console.log(value);
+  return value.map(({ id, pageURL, previewURL, user }) => {
+    return (
+      <li key={id}>
+        <img src={previewURL} alt={user} />
+      </li>
+    );
+  });
 };
 export default ImageItemGallery;

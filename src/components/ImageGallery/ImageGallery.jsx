@@ -5,17 +5,11 @@ import ImageItemGallery from './ImageItemGallery';
 const ImageGallery = ({ value }) => {
   const handleItemClick = () => {};
   console.log(value);
-  value.map(el => {
-    return (
-      <>
-        <ul>
-          <ImageItemGallery
-            handleItemClick={handleItemClick}
-          />
-        </ul>
-      </>
-    );
-  });
+  return (
+    <ul>
+      <ImageItemGallery value={value} />
+    </ul>
+  );
 };
 
 ImageGallery.propTypes = {};
