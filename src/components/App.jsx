@@ -6,15 +6,22 @@ import Api from './api/Api';
 class App extends Component {
   state = {
     showModal: false,
+    searchValue: '',
+    response: [],
   };
 
-  componentDidMount(){
-    Api()
+  componentDidUpdate() {
+    this.handleSearch();
   }
+  handleSearch = async () => {
+    const arr = await Api(this.state.searchValue);
+    this.setState({ response: arr.data.hits });
+  };
+
   getRequestSearch = data => {
     console.log(data);
     this.setState({
-      search: data.search,
+      searchValue: data.search,
     });
   };
   togleShowModal = () => {
@@ -34,7 +41,9 @@ class App extends Component {
       >
         <Searchbar getSearch={this.getRequestSearch} />
         {this.state.showModal && (
-          <ModalWindow onClose={this.togleShowModal}></ModalWindow>
+          <ModalWindow
+            onClose={this.togleShowModal}
+          ></ModalWindow>
         )}
       </div>
     );
