@@ -15,15 +15,15 @@ class App extends Component {
     if (prevState.searchValue === this.state.searchValue)
       return;
 
-    this.handleSearch();
+    this.handleSearch(this.state.searchValue);
   }
   handleSearch = async () => {
+    console.log(this.state.searchValue);
     const arr = await Api(this.state.searchValue);
     this.setState({ response: arr.data.hits });
   };
 
   getRequestSearch = data => {
-    console.log(data);
     this.setState({
       searchValue: data.search,
     });
