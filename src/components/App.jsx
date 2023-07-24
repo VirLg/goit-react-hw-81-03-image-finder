@@ -1,12 +1,16 @@
 import { Component } from 'react';
 import ModalWindow from './Modal/Modal';
 import Searchbar from './Searchbar/Searchbar';
+import Api from './api/Api';
 
 class App extends Component {
   state = {
     showModal: false,
   };
 
+  componentDidMount(){
+    Api()
+  }
   getRequestSearch = data => {
     console.log(data);
     this.setState({
