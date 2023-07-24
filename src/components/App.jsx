@@ -2,6 +2,7 @@ import { Component } from 'react';
 import ModalWindow from './Modal/Modal';
 import Searchbar from './Searchbar/Searchbar';
 import Api from './api/Api';
+import ImageGallery from './ImageGallery/ImageGallery';
 
 class App extends Component {
   state = {
@@ -11,7 +12,7 @@ class App extends Component {
   };
 
   componentDidUpdate() {
-    this.handleSearch();
+    // this.handleSearch();
   }
   handleSearch = async () => {
     const arr = await Api(this.state.searchValue);
@@ -45,6 +46,7 @@ class App extends Component {
             onClose={this.togleShowModal}
           ></ModalWindow>
         )}
+        <ImageGallery value={this.state.response} />
       </div>
     );
   }

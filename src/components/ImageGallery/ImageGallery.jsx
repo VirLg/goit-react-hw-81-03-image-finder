@@ -1,12 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import ImageItemGallery from './ImageItemGallery';
 
-export default class ImageGallery extends Component {
-  static propTypes = {
-    prop: PropTypes,
-  };
+const ImageGallery = ({ value }) => {
+  const handleItemClick = () => {};
+  console.log(value);
+  return (
+    <>
+      <ul>
+        <ImageItemGallery
+          handleItemClick={handleItemClick}
+        />
+      </ul>
+    </>
+  );
+};
 
-  render() {
-    return <div></div>;
-  }
-}
+ImageGallery.propTypes = {};
+
+export default ImageGallery;
