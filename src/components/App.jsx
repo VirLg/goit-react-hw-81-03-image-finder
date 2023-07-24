@@ -10,9 +10,12 @@ class App extends Component {
     searchValue: '',
     response: [],
   };
+  s;
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.searchValue === this.state.searchValue)
+      return;
 
-  componentDidUpdate() {
-    // this.handleSearch();
+    this.handleSearch();
   }
   handleSearch = async () => {
     const arr = await Api(this.state.searchValue);
