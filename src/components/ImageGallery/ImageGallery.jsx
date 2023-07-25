@@ -2,12 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImageItemGallery from './ImageItemGallery';
 
-const ImageGallery = ({ value }) => {
+const ImageGallery = ({
+  id,
+  pageURL,
+  previewURL,
+  user,
+}) => {
+  console.log(id);
   const handleItemClick = () => {};
-  console.log(value);
+
   return (
     <ul>
-      <ImageItemGallery value={value} />
+      <ImageItemGallery
+        id={id}
+        pageURL={pageURL}
+        previewURL={previewURL}
+        user={user}
+      />
     </ul>
   );
 };

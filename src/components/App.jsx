@@ -10,7 +10,7 @@ class App extends Component {
     searchValue: '',
     response: [],
   };
-  s;
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.searchValue === this.state.searchValue)
       return;
@@ -49,7 +49,18 @@ class App extends Component {
             onClose={this.togleShowModal}
           ></ModalWindow>
         )}
-        <ImageGallery value={this.state.response} />
+        {this.state.response?.map(
+          ({ id, pageURL, previewURL, user }) => (
+            // console.log(id);
+
+            <ImageGallery
+              id={id}
+              pageURL={pageURL}
+              previewURL={previewURL}
+              user={user}
+            />
+          )
+        )}
       </div>
     );
   }
