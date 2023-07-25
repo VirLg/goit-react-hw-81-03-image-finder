@@ -3,24 +3,41 @@ import ModalWindow from './Modal/Modal';
 import Searchbar from './Searchbar/Searchbar';
 import Api from './api/Api';
 import ImageGallery from './ImageGallery/ImageGallery';
+import Button from './Button/Button';
 
 class App extends Component {
   state = {
     showModal: false,
     searchValue: '',
     response: [],
+    error: '',
+    isLoading: false,
+    page: 1,
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.searchValue === this.state.searchValue)
+    if (
+      prevState.searchValue === this.state.searchValue ||
+      this.state.searchValue === ''
+    )
       return;
 
-    this.handleSearch(this.state.searchValue);
+    this.handleSearch();
   }
   handleSearch = async () => {
-    console.log(this.state.searchValue);
-    const arr = await Api(this.state.searchValue);
-    this.setState({ response: arr.data.hits });
+    try {
+      this.setState({ isLoading: true });
+      const arr = await Api({
+        value: this.state.searchValue,
+        page: this.state.page,
+      });
+      this.setState({ response: arr.data.hits });
+    } catch (error) {
+      this.setState({ error: error.message });
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
   };
 
   getRequestSearch = data => {
@@ -31,7 +48,10 @@ class App extends Component {
   togleShowModal = () => {
     this.setState({ showModal: !this.state.showModal });
   };
+  changePage = () => {};
   render() {
+    const { error, showModal, response, isLoading } =
+      this.state;
     return (
       <div
         style={{
@@ -43,13 +63,18 @@ class App extends Component {
           color: '#010101',
         }}
       >
+        {isLoading && <h2>Загружаем...</h2>}
+        {error && <h2>{error}</h2>}
         <Searchbar getSearch={this.getRequestSearch} />
-        {this.state.showModal && (
+        {showModal && (
           <ModalWindow
             onClose={this.togleShowModal}
           ></ModalWindow>
         )}
-        {this.state.response?.map(
+        {/* {response?.length === 0 && (
+          <h2>Search is not found</h2>
+        )} */}
+        {response?.map(
           ({ id, pageURL, previewURL, user }) => (
             // console.log(id);
 
@@ -60,6 +85,10 @@ class App extends Component {
               user={user}
             />
           )
+        )}
+
+        {response === [] && (
+          <Button onClick={this.changePage} />
         )}
       </div>
     );

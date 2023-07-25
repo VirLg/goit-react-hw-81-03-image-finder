@@ -8,7 +8,6 @@ const ImageGallery = ({
   previewURL,
   user,
 }) => {
-  console.log(id);
   const handleItemClick = () => {};
 
   return (
