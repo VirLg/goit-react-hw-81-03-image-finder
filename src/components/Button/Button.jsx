@@ -1,7 +1,6 @@
-const Button = props => {
-  console.log(props);
+const Button = ({ changePage }) => {
   const change = () => {
-    console.log(555);
+    changePage();
   };
   return (
     <>

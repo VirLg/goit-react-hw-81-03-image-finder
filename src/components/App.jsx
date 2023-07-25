@@ -23,6 +23,7 @@ class App extends Component {
       return;
 
     this.handleSearch();
+    this.setState({ page: 0 });
   }
   handleSearch = async () => {
     try {
@@ -36,7 +37,10 @@ class App extends Component {
       this.setState({ error: error.message });
       console.log(error);
     } finally {
-      this.setState({ isLoading: false });
+      this.setState({
+        isLoading: false,
+        page: this.state.page + 1,
+      });
     }
   };
 
@@ -48,8 +52,11 @@ class App extends Component {
   togleShowModal = () => {
     this.setState({ showModal: !this.state.showModal });
   };
-  changePage = shot => {
-    console.log(shot);
+  changePage = () => {
+    this.setState({
+      page: this.state.page,
+    });
+    this.handleSearch(this.state.page);
   };
   render() {
     const { error, showModal, response, isLoading } =
