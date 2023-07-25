@@ -1,7 +1,13 @@
-const Button = () => {
+const Button = props => {
+  console.log(props);
+  const change = () => {
+    console.log(555);
+  };
   return (
     <>
-      <button>Load More!!!!!!!!!!!!</button>
+      <button onClick={change}>
+        Load More!!!!!!!!!!!!
+      </button>
     </>
   );
 };
