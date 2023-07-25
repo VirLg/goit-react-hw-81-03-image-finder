@@ -48,7 +48,9 @@ class App extends Component {
   togleShowModal = () => {
     this.setState({ showModal: !this.state.showModal });
   };
-  changePage = () => {};
+  changePage = shot => {
+    console.log(shot);
+  };
   render() {
     const { error, showModal, response, isLoading } =
       this.state;
@@ -76,20 +78,15 @@ class App extends Component {
         )} */}
         {response?.map(
           ({ id, pageURL, previewURL, user }) => (
-            // console.log(id);
-
             <ImageGallery
-              id={id}
+              key={id}
               pageURL={pageURL}
               previewURL={previewURL}
               user={user}
             />
           )
         )}
-
-        {response === [] && (
-          <Button onClick={this.changePage} />
-        )}
+        {<Button />}
       </div>
     );
   }

@@ -1,7 +1,7 @@
-const Button = changePage => {
+const Button = () => {
   return (
     <>
-      <button onClick={changePage}>Load More</button>
+      <button>Load More!!!!!!!!!!!!</button>
     </>
   );
 };
