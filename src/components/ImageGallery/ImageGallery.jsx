@@ -7,9 +7,9 @@ const ImageGallery = ({
   pageURL,
   previewURL,
   user,
+  modalContent,
+  largeImageURL,
 }) => {
-  const handleItemClick = () => {};
-
   return (
     <ul>
       <ImageItemGallery
@@ -17,6 +17,8 @@ const ImageGallery = ({
         pageURL={pageURL}
         previewURL={previewURL}
         user={user}
+        modalContent={modalContent}
+        largeImageURL={largeImageURL}
       />
     </ul>
   );

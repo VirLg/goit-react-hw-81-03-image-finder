@@ -13,6 +13,7 @@ class App extends Component {
     error: '',
     isLoading: false,
     page: 1,
+    renderModal: '',
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -23,7 +24,7 @@ class App extends Component {
       return;
 
     this.handleSearch();
-    this.setState({ page: 0 });
+    this.setState({ page: 1 });
   }
   handleSearch = async () => {
     try {
@@ -52,11 +53,24 @@ class App extends Component {
   togleShowModal = () => {
     this.setState({ showModal: !this.state.showModal });
   };
-  changePage = () => {
-    this.setState({
-      page: this.state.page,
+  changePage = async () => {
+    this.setState(prevState => {
+      console.log(prevState.page);
+      return {
+        page: prevState.page,
+      };
     });
-    this.handleSearch(this.state.page);
+    await this.handleSearch();
+  };
+  modalContent = largeImageURL => {
+    if (largeImageURL) {
+      this.setState({
+        showModal: !this.state.showModal,
+        renderModal: largeImageURL,
+      });
+    }
+
+    // this.state.response.map();
   };
   render() {
     const { error, showModal, response, isLoading } =
@@ -78,18 +92,28 @@ class App extends Component {
         {showModal && (
           <ModalWindow
             onClose={this.togleShowModal}
-          ></ModalWindow>
+            renderModal={this.renderModal}
+          />
         )}
         {/* {response?.length === 0 && (
           <h2>Search is not found</h2>
         )} */}
         {response?.map(
-          ({ id, pageURL, previewURL, user }) => (
+          ({
+            id,
+            pageURL,
+            previewURL,
+            user,
+            largeImageURL,
+          }) => (
             <ImageGallery
               key={id}
               pageURL={pageURL}
               previewURL={previewURL}
               user={user}
+              id={id}
+              largeImageURL={largeImageURL}
+              modalContent={this.modalContent}
             />
           )
         )}
