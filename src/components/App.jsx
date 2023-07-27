@@ -90,10 +90,9 @@ class App extends Component {
         {error && <h2>{error}</h2>}
         <Searchbar getSearch={this.getRequestSearch} />
         {showModal && (
-          <ModalWindow
-            onClose={this.togleShowModal}
-            renderModal={this.renderModal}
-          />
+          <ModalWindow onClose={this.togleShowModal}>
+            <img src={this.state.renderModal} alt="" />
+          </ModalWindow>
         )}
         {/* {response?.length === 0 && (
           <h2>Search is not found</h2>

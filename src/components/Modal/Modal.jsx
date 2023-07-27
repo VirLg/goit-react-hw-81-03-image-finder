@@ -6,7 +6,10 @@ class ModalWindow extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleCloseEsc);
+    window.removeEventListener(
+      'keydown',
+      this.handleCloseEsc
+    );
   }
 
   handleCloseEsc = e => {
@@ -19,11 +22,11 @@ class ModalWindow extends Component {
   };
   render() {
     return (
-      <div class="overlay" onClick={this.handleCloseOverlay}>
-        <div class="modal">
-          {/* <img src="" alt="" /> */}
-          {this.props.children}
-        </div>
+      <div
+        class="overlay"
+        onClick={this.handleCloseOverlay}
+      >
+        <div class="modal">{this.props.children}</div>
         <h2>Hello</h2>
       </div>
     );
